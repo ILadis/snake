@@ -1,39 +1,31 @@
 package snake.ai;
 
-import snake.game.Controller;
-import snake.game.Direction;
-import snake.game.Point;
-import snake.game.Snack;
-import snake.game.Snake;
-
-public class SimpleController implements Controller {
+public class SimpleController implements BasicTypeController {
 
 	@Override
-	public void control(Snake snake, Snack snack) {
-		Point snakePosition = snake.head().position();
-		Point snackPosition = snack.position();
+	public String control(Integer headX, Integer headY, Integer snackX, Integer snackY) {
+		Integer targetX = snackX - headX;
+		Integer targetY = snackY - headY;
 
-		Point targetDirection = snackPosition.copy().minus(snakePosition);
+		Double length = Math.sqrt(targetX * targetX + targetY * targetY);
 
-		Double length = Math.sqrt(targetDirection.x() * targetDirection.x() + targetDirection.y() * targetDirection.y());
+		Long x = Math.round(targetX / length);
+		Long y = Math.round(targetY / length);
 
-		Long x = Math.round(targetDirection.x() / length);
-		Long y = Math.round(targetDirection.y() / length);
-
-		Long closest = Long.MAX_VALUE;
-		Direction newDir = null;
-
-		for (Direction direction : Direction.values()) {
-			Point vector = direction.toPoint();
-
-			Long delta = Math.abs(vector.x() - x) + Math.abs(vector.y() - y);
-			if (delta < closest) {
-				newDir = direction;
-				closest = delta;
-			}
-		}
-
-		snake.direction(newDir);
+		return toDirection(x, y);
 	}
 
+	private String toDirection(Long x, Long y) {
+		if (x == -1) {
+			return "LEFT";
+		} else if (x == 1) {
+			return "RIGHT";
+		} else if (y == -1) {
+			return "UP";
+		} else if (y == 1) {
+			return "DOWN";
+		} else {
+			return "";
+		}
+	}
 }

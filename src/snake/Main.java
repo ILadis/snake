@@ -31,7 +31,7 @@ public class Main {
 		frame.pack();
 
 		KeyController controller = KeyController.forArrowKeys();
-		// Controller controller = new SimpleController();
+		// Controller controller = new BasicTypeController.Adapter(new SimpleController());
 
 		Game game = new Game(controller);
 		game.setup();
