@@ -9,10 +9,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import snake.ai.SimpleController;
-import snake.game.Controller;
 import snake.game.Game;
 import snake.gfx.BorderPaint;
+import snake.gfx.KeyController;
 import snake.gfx.Scene;
 import snake.gfx.SnackPaint;
 import snake.gfx.SnakePaint;
@@ -22,14 +21,17 @@ public class Main {
 	public static void main(String[] args) {
 		Frame frame = new Frame();
 		frame.setTitle("Snake AI");
-		frame.setSize(420, 555);
 		frame.setVisible(true);
+		frame.setResizable(false);
 
 		Canvas canvas = new Canvas();
-		frame.add(canvas);
+		canvas.setSize(420, 520);
 
-		// Controller controller = KeyController.forArrowKeys();
-		Controller controller = new SimpleController();
+		frame.add(canvas);
+		frame.pack();
+
+		KeyController controller = KeyController.forArrowKeys();
+		// Controller controller = new SimpleController();
 
 		Game game = new Game(controller);
 		game.setup();
@@ -47,7 +49,8 @@ public class Main {
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 		ScheduledFuture<?> loop = scheduler.scheduleAtFixedRate(task, 0, 10, TimeUnit.MILLISECONDS);
 
-		//canvas.addKeyListener(controller);
+		canvas.addKeyListener(controller);
+		canvas.requestFocus();
 
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
