@@ -24,7 +24,7 @@ public class SimpleController implements Controller {
 		Direction newDir = null;
 
 		for (Direction direction : Direction.values()) {
-			Point vector = direction.toVector();
+			Point vector = direction.toPoint();
 
 			Long delta = Math.abs(vector.x() - x) + Math.abs(vector.y() - y);
 			if (delta < closest) {

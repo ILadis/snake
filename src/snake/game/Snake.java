@@ -23,6 +23,10 @@ public class Snake implements Touchable {
 		this.direction = direction;
 	}
 
+	public Direction direction() {
+		return direction;
+	}
+
 	public void move() {
 		tail.move(direction);
 	}

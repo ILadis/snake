@@ -9,7 +9,20 @@ public enum Direction {
 		this.vector = Point.of(x, y);
 	}
 
-	public Point toVector() {
+	public Direction inverse() {
+		switch (this) {
+		case UP:
+			return DOWN;
+		case DOWN:
+			return UP;
+		case RIGHT:
+			return LEFT;
+		default:
+			return RIGHT;
+		}
+	}
+
+	public Point toPoint() {
 		return vector;
 	}
 }

@@ -34,9 +34,13 @@ public class KeyController extends KeyAdapter implements Controller {
 
 	@Override
 	public void control(Snake snake, Snack snack) {
-		if (!buffer.isEmpty()) {
+		while (!buffer.isEmpty()) {
 			Direction direction = buffer.remove();
-			snake.direction(direction);
+
+			if (!direction.inverse().equals(snake.direction())) {
+				snake.direction(direction);
+				break;
+			}
 		}
 	}
 

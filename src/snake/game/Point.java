@@ -44,12 +44,6 @@ public class Point {
 		return this;
 	}
 
-	public Point reverse() {
-		this.x *= -1;
-		this.y *= -1;
-		return this;
-	}
-
 	public Point copy() {
 		return new Point(x, y);
 	}

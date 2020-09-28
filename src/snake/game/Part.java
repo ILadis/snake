@@ -30,7 +30,7 @@ public class Part implements Touchable, Iterable<Part> {
 
 	public void move(Direction direction) {
 		if (isHead()) {
-			position.add(direction.toVector());
+			position.add(direction.toPoint());
 		} else {
 			position.assign(parent.position);
 			parent.move(direction);
