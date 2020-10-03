@@ -8,14 +8,17 @@ public class Timer {
 		this.current = 0d;
 	}
 
-	public Integer advance(Double dtime) {
+	public Double advance(Double dtime) {
 		current += dtime;
-
 		Double steps = current / value;
-		if (steps > 0) {
-			current %= value;
-		}
+		return steps;
+	}
 
-		return steps.intValue();
+	public void consume(Double steps) {
+		current -= steps * value;
+	}
+
+	public void reset(Double value) {
+		current = value;
 	}
 }

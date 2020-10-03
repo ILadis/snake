@@ -14,6 +14,10 @@ public class Snake implements Touchable {
 		return head;
 	}
 
+	public Part tail() {
+		return tail;
+	}
+
 	@Override
 	public Point position() {
 		return head.position();

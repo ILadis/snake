@@ -44,11 +44,13 @@ public class Part implements Touchable, Iterable<Part> {
 
 	@Override
 	public Iterator<Part> iterator() {
-		if (!isHead()) {
-			throw new IllegalStateException();
+		if (isHead()) {
+			return new HeadIterator(this);
+		} else if (isTail()) {
+			return new TailIterator(this);
 		}
 
-		return new HeadIterator(this);
+		throw new IllegalStateException();
 	}
 
 	static class HeadIterator implements Iterator<Part> {
@@ -67,6 +69,26 @@ public class Part implements Touchable, Iterable<Part> {
 		public Part next() {
 			Part next = current;
 			current = next.child;
+			return next;
+		}
+	}
+
+	static class TailIterator implements Iterator<Part> {
+		private Part current;
+
+		private TailIterator(Part tail) {
+			this.current = tail;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return current != null;
+		}
+
+		@Override
+		public Part next() {
+			Part next = current;
+			current = next.parent;
 			return next;
 		}
 	}

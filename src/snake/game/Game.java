@@ -3,7 +3,6 @@ package snake.game;
 import java.util.Random;
 
 public class Game {
-
 	private Controller controller;
 	private Random random;
 	private Border border;
@@ -47,8 +46,9 @@ public class Game {
 	}
 
 	public void step(Double dtime) {
-		Integer steps = velocity.advance(dtime);
-		while (alive && steps-- > 0) {
+		Double steps = velocity.advance(dtime);
+		while (alive && --steps > 0) {
+			velocity.consume(1d);
 			controller.control(snake, snack);
 			snake.move();
 			checkFatality();

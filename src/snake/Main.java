@@ -42,8 +42,8 @@ public class Main {
 		scene.add(new SnackPaint(game.food()));
 
 		Runnable task = () -> {
-			game.step(0.010d);
 			scene.draw(0.010d);
+			game.step(0.010d);
 		};
 
 		ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
